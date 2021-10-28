@@ -1,26 +1,47 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { useSelector } from 'react-redux';
+import { Container, Menu, PageBody } from './AppStyled';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import HomeScreen from './pages/HomeScreen';
+import Tela2Screen from './pages/Tela2Screen';
+import MenuItem from './components/MenuItem';
+import PrivateRoute from './components/PrivateRoute';
+import Cart from './components/Cart';
+
+export default () => {
+
+    const name = useSelector(state => state.user.name);
+
+    return (
+        <BrowserRouter>
+            <Container>
+                <Menu>
+                    <MenuItem icon="/assets/store.png" link="/"/>
+                    <MenuItem icon="/assets/order.png" link="orders"/>
+                    <MenuItem icon="/assets/profile.png" link="profile"/>
+                </Menu>
+                <PageBody>
+                    <Switch>
+                        <Route exact path="/">
+                            <HomeScreen />
+                        </Route>
+
+                        <Route path="/tela2/:name">
+                            <Tela2Screen />
+                        </Route>
+
+                        <PrivateRoute path="/orders">
+                            <div>Tela de Pedidos</div>
+                        </PrivateRoute>
+
+                        <PrivateRoute path="/profile">
+                            <div>Tela de Perfil </div>
+                        </PrivateRoute>
+                    </Switch>
+                </PageBody> 
+                <Cart/> 
+            </Container>         
+        </BrowserRouter>
+    );
 }
-
-export default App;
