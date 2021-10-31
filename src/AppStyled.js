@@ -20,4 +20,5 @@ display:flex;
 background-color:#00980D;
 background-image:url('/assets/bg.png');
 flex:1;
+overflow-y:auto; //scroll da area verde clara, só o body
 `; 
