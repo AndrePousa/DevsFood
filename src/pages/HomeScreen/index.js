@@ -1,10 +1,17 @@
 import React,{ useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
-import { Container, CategoryArea, CategoryList } from './styled'; //arquivo da HomeScreen
+import {
+     Container,
+      CategoryArea, 
+      CategoryList,
+      ProductArea,
+      ProductList,
+} from './styled'; //arquivo da HomeScreen
 import Header from '../../components/Header';
 import api from '../../api/Api' //importando a api
 import CategoryItem from '../../components/CategoryItem'; //importando o componente 
 import ReactTooltip from 'react-tooltip';
+import ProductItem from '../../components/ProductItem';
 
 
 export default () => {
@@ -12,7 +19,16 @@ export default () => {
 
     const [headerSearch, setHeaderSearch] = useState('');
     const [categories, setCategories] = useState([]);
-    const [activeCategory, setActiveCategory] = useState(''); //armazena a cateforia ativa no momento
+    const [activeCategory, setActiveCategory] = useState(''); //armazena a categoria ativa no momento
+    const [products, setProducts] = useState([]);
+
+    //fazendo o get
+    const getProducts = async () => {
+        const prods = await api.getProducts();
+        if(prods.error == ''){
+            setProducts(prods.result.data);
+        }
+    }
     
     //fazendo o get
     useEffect(() =>{
@@ -28,7 +44,7 @@ export default () => {
     },[])
 
     useEffect(() =>{
-
+        getProducts();
     },[activeCategory]);
 
     return (
@@ -62,6 +78,19 @@ export default () => {
                             ))}
                         </CategoryList>
                     </CategoryArea>
+                }
+                {products.length > 0 && 
+                <ProductArea>
+                    <ProductList>
+                        {products.map((item, index) => (
+                            <ProductItem
+                                key={index}
+                                data={item}
+                            />
+                        ))}
+
+                    </ProductList>
+                </ProductArea>
                 }
         </Container>
     );

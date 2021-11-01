@@ -7,5 +7,13 @@ export default {
     const res = await fetch(Base+'/categories')
     const json = await res.json();
     return json;
+  },
+
+  getProducts: async () => {
+
+    const res = await fetch(Base+'/products')
+    const json = await res.json();
+    return json;
+
   }
 };
