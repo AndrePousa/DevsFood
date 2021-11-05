@@ -15,6 +15,7 @@ import CategoryItem from '../../components/CategoryItem'; //importando o compone
 import ReactTooltip from 'react-tooltip';
 import ProductItem from '../../components/ProductItem';
 import Modal from '../../components/Modal';
+import ModalProduct from '../../components/ModalProduct';
 
 //timer deve ser fiel a varias execuções simultaneas.
 let searchTimer = null;
@@ -29,7 +30,8 @@ export default () => {
     const [totalPages, setTotalPages] = useState(0);
     const [activePage, setActivePage] = useState(1);
     const [activeSearch, setActiveSearch] = useState('');
-    const [modalStatus, setModalStatus] = useState(true); //status do modal
+    const [modalStatus, setModalStatus] = useState(false); //status do modal
+    const [modalData, setModalData] = useState({});  //informações que irei mandar para o modal
 
     //fazendo o get
     const getProducts = async () => {
@@ -65,6 +67,11 @@ export default () => {
         setProducts([]);
         getProducts();
     },[activeCategory, activePage, activeSearch]);
+
+    const handleProductClick = (data) =>{
+        setModalStatus(true)
+        setModalData(data);
+    }
 
     return (
         <Container>
@@ -105,6 +112,7 @@ export default () => {
                             <ProductItem
                                 key={index}
                                 data={item}
+                                onClick={handleProductClick}
                             />
                         ))}
 
@@ -126,7 +134,7 @@ export default () => {
                     </ProductPaginationArea>
                 }
                 <Modal status={modalStatus} setStatus={setModalStatus}> 
-                    Conteúdo do Modal
+                    <ModalProduct data={modalData} setStatus={setModalStatus}/>
                 </Modal>
         </Container>
     );

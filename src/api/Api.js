@@ -28,6 +28,5 @@ export default {
     const res = await fetch(Base+'/products?'+queryString);
     const json = await res.json();
     return json;
-
   }
 };

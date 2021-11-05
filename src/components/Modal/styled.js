@@ -15,12 +15,10 @@ export const Container = styled.div`
 
 //terá um tamanho que varia de acordo com seu conteúdo.
 export const ModalBody = styled.div`
-  width:300px;
-  height:300px;
   background-color:#fff;
   border-radius:20px;
   box-shadow:0px 0px 50px #000;
   max-height:95vh;
-  max-width:100vh;
+  max-width:100vw;
   overflow:auto;  //barra de rolagem se precisar
 `;

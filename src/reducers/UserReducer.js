@@ -1,4 +1,3 @@
-/* eslint-disable default-case */
 const initialState = {
     token: ' ',
     name: 'Teste'
