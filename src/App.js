@@ -18,8 +18,8 @@ export default () => {
             <Container>
                 <Menu>
                     <MenuItem title="Loja" icon="/assets/store.png" link="/"/>
-                    <MenuItem title="Pedidos" icon="/assets/order.png" link="orders"/>
-                    <MenuItem title="Meu Perfil" icon="/assets/profile.png" link="profile"/>
+                    <MenuItem title="Pedidos" icon="/assets/order.png" link="/orders"/>
+                    <MenuItem title="Meu Perfil" icon="/assets/profile.png" link="/profile"/>
                 </Menu>
                 <PageBody>
                     <Switch>

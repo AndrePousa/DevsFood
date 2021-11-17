@@ -9,6 +9,7 @@ export default ({title, icon, link}) => {
 
   //compara com o link de destino
   let isActive = location.pathname == link;
+  console.log(location.pathname)
 
   //o click original não aconteça
   //muda de componente, mas o link continua disponivel
